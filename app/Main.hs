@@ -1,6 +1,6 @@
 module Main where
 
-import HelloWorld (hello)
+import ListOperations (toDigits)
 
 main :: IO ()
-main = putStrLn hello
+main = putStrLn $ show $ toDigits 102
