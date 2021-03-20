@@ -25,6 +25,15 @@ library hello-world
 
     default-language: Haskell2010
 
+library list-operations
+    exposed-modules:  ListOperations
+
+    build-depends:    
+        base ^>=4.14.1.0
+    hs-source-dirs:   src/list-operations
+
+    default-language: Haskell2010
+
 test-suite hello-world-test
     type: exitcode-stdio-1.0
     main-is: HelloWorldTest.hs
@@ -34,5 +43,17 @@ test-suite hello-world-test
         hello-world,
         hspec ==2.7.8
     hs-source-dirs:   test/hello-world
+
+    default-language: Haskell2010
+
+test-suite list-operations-test
+    type: exitcode-stdio-1.0
+    main-is: ListOperationsTest.hs
+
+    build-depends:    
+        base ^>=4.14.1.0,
+        list-operations,
+        hspec ==2.7.8
+    hs-source-dirs:   test/list-operations
 
     default-language: Haskell2010
