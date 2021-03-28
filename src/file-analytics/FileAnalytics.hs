@@ -1,8 +1,12 @@
 module FileAnalytics (
     Movie(..)
     ,highestGross
-    ,highestIncome)
+    ,highestIncome
+    ,csvRowToMovie)
 where
+
+import Data.List.Split ( splitOn )
+import Data.Char ( isDigit )
 
 data Movie = Movie {
     title :: String
@@ -23,3 +27,20 @@ highestIncome (m1:m2:ms)
     | income m1 > income m2 = highestIncome $ m1 : ms
     | otherwise = highestIncome $ m2 : ms
     where income m = gross m - budget m
+
+csvRowToMovie :: String -> Maybe Movie
+csvRowToMovie row =
+    let 
+        values = splitOn "," row
+        isValid = 
+            length values == 4 && 
+            values!!0 /= "" &&
+            all isDigit (values!!1) &&
+            all isDigit (values!!2) &&
+            all isDigit (values!!3)
+        movie = Movie {
+            title=values!!0
+            , year=read $ values!!1
+            , gross=read $ values!!2
+            , budget=read $ values!!3}
+    in if isValid then Just movie else Nothing

@@ -2,8 +2,9 @@ import Test.Hspec
 
 import FileAnalytics (
     Movie(..)
-    ,highestGross
-    ,highestIncome)
+    , highestGross
+    , highestIncome
+    , csvRowToMovie)
 
 main :: IO ()
 main = hspec $ do
@@ -28,6 +29,10 @@ main = hspec $ do
                     , Movie {title="Second movie",year=2019,gross=150000,budget=100000}
                     , Movie {title="Third movie",year=2018,gross=90000,budget=20000}
                     ]
-            highestIncome movies `shouldBe`(Just Movie {title="Third movie",year=2018,gross=90000,budget=20000} :: Maybe Movie)
-
+            highestIncome movies `shouldBe` (Just Movie {title="Third movie",year=2018,gross=90000,budget=20000} :: Maybe Movie)
+    describe "FileAnalytics.csvRowToMovie" $ do
+        it "returns Nothing for an invalid movie row" $ do
+            csvRowToMovie " ,nonyear,10000,nonbudget" `shouldBe` (Nothing :: Maybe Movie)
+        it "returns Just Movie for a valid movie row" $ do
+            csvRowToMovie "Popular movie,2021,1000000000,5000000" `shouldBe` (Just Movie {title="Popular movie",year=2021,gross=1000000000,budget=5000000} :: Maybe Movie)
 
