@@ -12,6 +12,7 @@ executable exercises
     build-depends:    
         base ^>=4.14.1.0,
         hello-world,
+        file-analytics,
         list-operations
     hs-source-dirs:   app
 

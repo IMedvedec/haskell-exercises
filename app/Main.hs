@@ -1,6 +1,9 @@
 module Main where
 
-import ListOperations (toDigits)
+import FileAnalytics (moviesFromFile)
+import ListOperations (printElements)
 
 main :: IO ()
-main = putStrLn $ show $ toDigits 102
+main = do
+    movies <- moviesFromFile "./static/movies.csv"
+    printElements movies

@@ -1,4 +1,10 @@
-module ListOperations(len,sumEven,toReverseDigits,toDigits) where
+module ListOperations(
+    len
+    ,sumEven
+    ,toReverseDigits
+    ,toDigits
+    ,printElements)
+where
 
 len :: Integral b => [a] -> b
 len [] = 0
@@ -15,3 +21,10 @@ toReverseDigits x
 
 toDigits :: Integral a => a -> [a]
 toDigits x = reverse $ toReverseDigits x
+
+printElements :: Show a => [a] -> IO()
+printElements [] = print ""
+printElements [x] = print x
+printElements (x:xs) = do
+    print x
+    printElements xs

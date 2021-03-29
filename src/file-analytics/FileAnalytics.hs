@@ -2,7 +2,8 @@ module FileAnalytics (
     Movie(..)
     ,highestGross
     ,highestIncome
-    ,csvRowToMovie)
+    ,csvRowToMovie
+    ,moviesFromFile)
 where
 
 import Data.List.Split ( splitOn )
@@ -27,6 +28,13 @@ highestIncome (m1:m2:ms)
     | income m1 > income m2 = highestIncome $ m1 : ms
     | otherwise = highestIncome $ m2 : ms
     where income m = gross m - budget m
+
+moviesFromFile :: String -> IO [Maybe Movie]
+moviesFromFile path = do
+    content <- readFile path
+    let strMovies = lines content
+    return $ filter (/= Nothing) $ map csvRowToMovie strMovies
+    
 
 csvRowToMovie :: String -> Maybe Movie
 csvRowToMovie row =
