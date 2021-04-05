@@ -13,7 +13,8 @@ executable exercises
         base ^>=4.14.1.0,
         hello-world,
         file-analytics,
-        list-operations
+        list-operations,
+        state
     hs-source-dirs:   app
 
     default-language: Haskell2010
@@ -43,6 +44,17 @@ library file-analytics
         base ^>=4.14.1.0,
         split ==0.2.3.4
     hs-source-dirs:   src/file-analytics
+
+    default-language: Haskell2010
+
+library state
+    exposed-modules: Stack
+
+    build-depends:    
+        base ^>=4.14.1.0,
+        transformers >=0.4 && <0.6,
+        mtl ^>=2.2.2,
+    hs-source-dirs:   src/state
 
     default-language: Haskell2010
 
